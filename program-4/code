@@ -9,7 +9,7 @@ int main()
     struct s1 ap;
     ap.age = 19;
     ap.gpa = 8.4;
-    printf("The address of ap's age = %p",&ap.age);
-    printf("The address of ap's gpa = %p",&ap.gpa);
+    printf("The address of ap's age = %p. The value is %d.",&ap.age,ap.age);
+    printf("The address of ap's gpa = %p. The value is %f.",&ap.gpa,ap.gpa);
     return 0;
 }
