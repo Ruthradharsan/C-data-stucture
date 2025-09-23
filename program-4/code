@@ -1,0 +1,15 @@
+#include<stdio.h>
+struct s1
+{
+    int age;
+    float gpa;
+};
+int main()
+{
+    struct s1 ap;
+    ap.age = 19;
+    ap.gpa = 8.4;
+    printf("The address of ap's age = %p",&ap.age);
+    printf("The address of ap's gpa = %p",&ap.gpa);
+    return 0;
+}
