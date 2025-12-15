@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node *next;
+};
+struct Node *head = NULL;
+void create(int n) {
+    struct Node *newNode, *temp;
+    int x;
+    for (int i = 0; i < n; i++) {
+        newNode = malloc(sizeof(struct Node));
+        scanf("%d", &x);
+        newNode->data = x;
+        newNode->next = NULL;
+        if (head == NULL) {
+            head = newNode;
+            temp = head;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+}
+void deleteFirst() {
+    struct Node *temp;
+    if (head == NULL) return;
+    temp = head;
+    head = head->next;
+    free(temp);
+}
+void deleteLast() {
+    struct Node *temp = head, *prev = NULL;
+    if (head == NULL) 
+	return;
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    free(temp);
+}
+void deleteElement(int x) {
+    struct Node *temp = head, *prev = NULL;
+    if (head == NULL) 
+	return;
+    if (head->data == x) {
+        deleteFirst();
+        return;
+    }
+    while (temp != NULL && temp->data != x) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp != NULL) {
+        prev->next = temp->next;
+        free(temp);
+    }
+}
+void display() {
+    struct Node *temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}
+int main() {
+    int n, x;
+    scanf("%d", &n);
+    create(n);
+    deleteFirst();
+    deleteLast();
+    scanf("%d", &x);
+    deleteElement(x);
+    display();
+    return 0;
+}
+
+MENU
+1. Create List 1
+2. Create List 2
+3. Sort List 1
+4. Reverse List 1
+5. Concatenate List 1 & 2
+6. Display List 1
+7. Exit
+Enter choice: 1
+Enter number of nodes: 4
+10 30 20 40
+MENU
+1. Create List 1
+2. Create List 2
+3. Sort List 1
+4. Reverse List 1
+5. Concatenate List 1 & 2
+6. Display List 1
+7. Exit
+Enter choice: 7
