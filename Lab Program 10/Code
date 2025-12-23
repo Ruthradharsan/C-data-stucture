@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 10
+#define NAME 50
+
+struct Employee {
+    int key;
+    char name[NAME];
+};
+
+struct Employee *ht[SIZE];
+
+int hash(int k) {
+    return k % SIZE;
+}
+
+void init() {
+    for (int i = 0; i < SIZE; i++) {
+        ht[i] = NULL;
+    }
+}
+
+void insert(int key, char name[]) {
+    int i = hash(key);
+    while (ht[i] != NULL) {
+        i = (i + 1) % SIZE;
+    }
+    ht[i] = (struct Employee *)malloc(sizeof(struct Employee));
+    ht[i]->key = key;
+    strcpy(ht[i]->name, name);
+}
+
+void display() {
+    printf("Hash Tables:\n");
+    for (int i = 0; i < SIZE; i++) {
+        if (ht[i]) {
+            printf("%d : %d %s\n", i, ht[i]->key, ht[i]->name);
+        } else {
+            printf("%d : Empty\n", i);
+        }
+    }
+}
+
+int main() {
+    int key;
+    char name[NAME];
+    init();
+    
+    for (int i = 0; i < 5; i++) {
+        printf("Key : ");
+        scanf("%d", &key);
+        getchar(); // consume newline
+        printf("Name : ");
+        fgets(name, NAME, stdin);
+        name[strcspn(name, "\n")] = 0; // remove newline
+        insert(key, name);
+    }
+    
+    display();
+    return 0;
+}
